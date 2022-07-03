@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Counter from "./components/Counter"
+import PostList from "./components/PostList"
+import MyBytton from "./components/UI/button/MyButton"
+import './styles/App.css'
+import MyInput from "./components/UI/input/MyInput"
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [posts, setPosts] = useState([
+        { id: 1, title: 'Javascript', body: 'Description' },
+        { id: 2, title: 'Java', body: 'Description Java2' },
+        { id: 3, title: 'Java', body: 'Description Java2' }
+    ]);
+
+    const addNewPost = () => {
+
+    }
+
+    const [title, setTitle] = useState('');
+
+    return (
+        <div className="App">
+            <form>
+                <MyInput value={title} placeholder="name post" onChange={e => setTitle(e.target.value)} />
+                <MyInput placeholder="body post" />
+
+                <MyBytton onClick={addNewPost} disabled children="I'm a pink circle!" />
+            </form>
+
+            <PostList posts={posts} title="FrontEnd" />
+        </div>
+    );
 }
+
 
 export default App;
