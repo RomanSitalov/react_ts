@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
 import Counter from "./components/Counter"
 import PostList from "./components/PostList"
-import MyBytton from "./components/UI/button/MyButton"
 import './styles/App.css'
-import MyInput from "./components/UI/input/MyInput"
+import PostForm from "./components/PostForm"
 
+interface IPostItem {
+    id: number,
+    title: string,
+    body: string,
+}
 
-
-function App() {
+function App(this: any) {
 
     const [posts, setPosts] = useState([
-        { id: 1, title: 'Javascript', body: 'Description' },
-        { id: 2, title: 'Java', body: 'Description Java2' },
-        { id: 3, title: 'Java', body: 'Description Java2' }
+        { id: 45654, title: 'Javascript', body: 'Description' },
+        { id: 576867, title: 'Java', body: 'Description Java2' },
+        { id: 2346, title: 'Java', body: 'Description Java2' }
     ]);
 
-    const addNewPost = () => {
 
+    const createPost = (newPost: IPostItem) => {
+        setPosts([...posts, newPost]);
     }
-
-    const [title, setTitle] = useState('');
 
     return (
         <div className="App">
-            <form>
-                <MyInput value={title} placeholder="name post" onChange={e => setTitle(e.target.value)} />
-                <MyInput placeholder="body post" />
-
-                <MyBytton onClick={addNewPost} disabled children="I'm a pink circle!" />
-            </form>
-
+            <PostForm create={createPost} />
             <PostList posts={posts} title="FrontEnd" />
         </div>
     );

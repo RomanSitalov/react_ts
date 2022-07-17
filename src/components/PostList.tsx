@@ -17,7 +17,7 @@ const PostList = (props: IPostList) => {
     return (
         <div>
             <h1 style={{ textAlign: 'center' }}>{props.title}</h1>
-            {props.posts.map(post => <PostItem post={post} key={post.id} />)}
+            {props.posts.map((post, index) => <PostItem post={post} index={index +1} key={post.id} />)}
         </div>);
 };
 

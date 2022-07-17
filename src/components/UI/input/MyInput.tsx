@@ -11,7 +11,7 @@ type Props = {
 
 const MyInput: React.FC<Props> = ({ placeholder, value, onChange }) => {
     return (
-        <input value={value} type="text" onChange={onChange} placeholder={placeholder} />
+        <input className="my-input" value={value} type="text" onChange={onChange} placeholder={placeholder} />
     );
 }
 
