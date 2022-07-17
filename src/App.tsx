@@ -23,10 +23,14 @@ function App(this: any) {
         setPosts([...posts, newPost]);
     }
 
+    const removePost = (post: IPostItem ) => {
+        setPosts(posts.filter(p=>p.id !== post.id));
+    }
+
     return (
         <div className="App">
             <PostForm create={createPost} />
-            <PostList posts={posts} title="FrontEnd" />
+            <PostList remove={removePost} posts={posts} title="FrontEnd" />
         </div>
     );
 }
