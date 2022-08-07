@@ -8,6 +8,7 @@
     <JavaScriptTestFramework>Jest</JavaScriptTestFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\components\UI\select\" />
     <Folder Include="src\styles\" />
   </ItemGroup>
 </Project>
