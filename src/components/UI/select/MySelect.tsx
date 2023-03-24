@@ -1,4 +1,5 @@
 import React from 'react'
+import classes from './MySelect.module.scss'
 
 type OptionData = {
     value: string,
@@ -16,7 +17,7 @@ const MySelect: React.FC<Options> = ({ defaultValue, options, value, onChange })
 
     return (
         <div>
-            <select value={value} onChange={event => onChange(event.target.value)}>
+            <select className={classes.mySelect} value={value} onChange={event => onChange(event.target.value)}>
                 <option disabled value="">{defaultValue}</option>
                 {
                     options.map(option => <option key={option.value} value={option.value}>{option.name}</option>)

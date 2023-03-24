@@ -1,10 +1,10 @@
 import React from 'react';
-import './MyButton.css';
+import classes from './MyButton.module.scss';
 
 type Props = {
     disabled?: boolean;
     children?: React.ReactNode;
-    onClick(event: React.MouseEvent<HTMLButtonElement>): void;
+    onClick (event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
 const MyButton: React.FC<Props> = ({
@@ -13,7 +13,7 @@ const MyButton: React.FC<Props> = ({
     disabled,
 }) => {
     return (
-        <button className="my-btn" type="submit" disabled={disabled} onClick={onClick}>
+        <button className={classes.myBtn} type="submit" disabled={disabled} onClick={onClick}>
             {children}
         </button>
     );

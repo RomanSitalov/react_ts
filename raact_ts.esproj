@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.26-alpha">
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.26-alpha">
   <PropertyGroup Label="Globals">
     <ProjectGuid>d9d46d02-6a2b-46e9-89c3-ddc5c7a42f4f</ProjectGuid>
   </PropertyGroup>
@@ -9,6 +9,5 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\components\UI\select\" />
-    <Folder Include="src\styles\" />
   </ItemGroup>
 </Project>

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import MyInput from "./UI/input/MyInput"
 import MyButton from "./UI/button/MyButton"
 
-
 interface IPostItem {
     id: number,
     title: string,
@@ -12,7 +11,6 @@ interface IPostItem {
 interface IAddPost {
     create: (arg: IPostItem) => void,
 }
-
 
 const PostForm: React.FC<IAddPost> = ({ create }) => {
 
@@ -37,6 +35,6 @@ const PostForm: React.FC<IAddPost> = ({ create }) => {
             </form>
         </div>
     );
-}; 
+};
 
 export default PostForm;

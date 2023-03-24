@@ -31,6 +31,13 @@ function App (this: any) {
         { id: 2346, title: 'Java', body: 'Description Java2' }
     ]);
 
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedSort, setSelectedSort] = useState('');
+
+    const sortedPosts = () => {
+        [...posts].sort((a, b) => a.title.localeCompare(selectedSort));
+        return [...posts];
+    }
 
     const createPost = (newPost: IPostItem) => {
         setPosts([...posts, newPost]);
@@ -40,9 +47,7 @@ function App (this: any) {
         setPosts(posts.filter(p => p.id !== post.id));
     }
 
-    const [selectedSort, setSelectedSort] = useState('');
-
-    const sortPosts = (sort: string ) => {
+    const sortPosts = (sort: string) => {
         setSelectedSort(sort);
         console.log(sort);
 
@@ -51,7 +56,6 @@ function App (this: any) {
         } else {
             setPosts([...posts].sort((a, b) => a.body.localeCompare(b.body)));
         }
-
     }
 
     const options = {
@@ -65,19 +69,22 @@ function App (this: any) {
 
     return (
         <div className="App">
+
+            <Counter />
+
             <PostForm create={createPost} />
             <hr style={{ margin: '15px 0' }} />
+            <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="search" />
             <MySelect options={options.options} onChange={options.onChange} value={options.value} defaultValue={options.defaultValue}></MySelect>
 
             {
                 posts.length ?
-                    <PostList remove={removePost} posts={posts} title="FrontEnd" />
+                    <PostList remove={removePost} posts={sortedPosts()} title="FrontEnd" />
                     :
                     <h1 style={{ textAlign: 'center' }}>Not found</h1>
             }
         </div>
     );
 }
-
 
 export default App;
