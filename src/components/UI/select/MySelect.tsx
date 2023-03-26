@@ -1,19 +1,19 @@
 import React from 'react'
 import classes from './MySelect.module.scss'
 
-type OptionData = {
+interface OptionData {
     value: string,
     name: string,
 }
 
-type Options = {
+interface Option {
     defaultValue: string,
     options: OptionData[],
-    value: string,
+    value?: string,
     onChange: (value: string) => void,
 }
 
-const MySelect: React.FC<Options> = ({ defaultValue, options, value, onChange }) => {
+const MySelect: React.FC<Option> = ({ defaultValue, options, value, onChange }) => {
 
     return (
         <div>
@@ -22,7 +22,7 @@ const MySelect: React.FC<Options> = ({ defaultValue, options, value, onChange })
                 {
                     options.map(option => <option key={option.value} value={option.value}>{option.name}</option>)
                 }
-            </select> 
+            </select>
         </div>
     );
 };

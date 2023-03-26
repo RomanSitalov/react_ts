@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Counter from "./components/Counter"
 import PostList from "./components/PostList"
 import './styles/App.css'
@@ -11,33 +11,28 @@ interface IPostItem {
     body: string,
 }
 
-type OptionData = {
+interface OptionData {
     value: string,
     name: string,
 }
 
-type Options = {
+interface Option {
     defaultValue: string,
     options: OptionData[],
-    value?: number,
+    value?: string,
     onChange: (value: string) => void,
 }
 
 function App (this: any) {
 
     const [posts, setPosts] = useState([
-        { id: 45654, title: 'Javascript', body: 'Description' },
-        { id: 576867, title: 'Java', body: 'Description Java2' },
-        { id: 2346, title: 'Java', body: 'Description Java2' }
+        { id: 45654, title: 'Javas3', body: 'Description1' },
+        { id: 576867, title: 'Java2', body: 'Description2' },
+        { id: 2346, title: 'Java1', body: 'Description3' }
     ]);
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedSort, setSelectedSort] = useState('');
-
-    const sortedPosts = () => {
-        [...posts].sort((a, b) => a.title.localeCompare(selectedSort));
-        return [...posts];
-    }
 
     const createPost = (newPost: IPostItem) => {
         setPosts([...posts, newPost]);
@@ -46,16 +41,28 @@ function App (this: any) {
     const removePost = (post: IPostItem) => {
         setPosts(posts.filter(p => p.id !== post.id));
     }
+    const sortedPosts = useMemo(() => {
+
+        if (selectedSort) {
+            if (selectedSort === 'title') {
+                return [...posts].sort((a, b) => a.title.localeCompare(b.title));
+            } else {
+                return [...posts].sort((a, b) => a.body.localeCompare(b.body));
+            }
+        }
+
+        return posts;
+    },
+        [selectedSort, searchQuery, posts]);
+
+    const sorterAndSearchedPosts = useMemo(() => {
+        return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery));
+    },
+        [selectedSort, searchQuery, posts]);
+
 
     const sortPosts = (sort: string) => {
         setSelectedSort(sort);
-        console.log(sort);
-
-        if (sort === 'title') {
-            setPosts([...posts].sort((a, b) => a.title.localeCompare(b.title)));
-        } else {
-            setPosts([...posts].sort((a, b) => a.body.localeCompare(b.body)));
-        }
     }
 
     const options = {
@@ -78,10 +85,9 @@ function App (this: any) {
             <MySelect options={options.options} onChange={options.onChange} value={options.value} defaultValue={options.defaultValue}></MySelect>
 
             {
-                posts.length ?
-                    <PostList remove={removePost} posts={sortedPosts()} title="FrontEnd" />
-                    :
-                    <h1 style={{ textAlign: 'center' }}>Not found</h1>
+                sorterAndSearchedPosts.length
+                    ? <PostList remove={removePost} posts={sorterAndSearchedPosts} title="List items" />
+                    : <h1 style={{ textAlign: 'center' }}>Not found</h1>
             }
         </div>
     );
